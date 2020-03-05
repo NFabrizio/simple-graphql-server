@@ -5,13 +5,55 @@ const { makeExecutableSchema } = require('graphql-tools');
 // Some fake data
 const books = [
   {
-    title: "Harry Potter and the Sorcerer's stone",
+    id: 0,
+    title: "Harry Potter and the Chamber of Secrets",
     author: 'J.K. Rowling',
   },
   {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
+    id: 1,
+    title: 'The Brethren',
+    author: 'John Grisham',
   },
+  {
+    id: 2,
+    title: 'The Wedding',
+    author: 'Danielle Steel',
+  },
+  {
+    id: 3,
+    title: 'The Indwelling',
+    author: 'Tim LaHaye',
+  },
+  {
+    id: 4,
+    title: 'Hot Six',
+    author: 'Janet Evanovich',
+  },
+  {
+    id: 5,
+    title: 'The Bear and the Dragon',
+    author: 'Tom Clancy',
+  },
+  {
+    id: 6,
+    title: 'The Rescue',
+    author: 'Nicholas Sparks',
+  },
+  {
+    id: 7,
+    title: 'The Last Precinct',
+    author: 'Patricia Cornwell',
+  },
+  {
+    id: 8,
+    title: 'Winter\'s Heart',
+    author: 'Robert Jordan',
+  },
+  {
+    id: 9,
+    title: 'The Mark',
+    author: 'Jerry B. Jenkins',
+  }
 ];
 
 // The GraphQL schema in string form
@@ -20,8 +62,9 @@ const typeDefs = `
     books: [Book]
   }
   type Book {
-    title: String,
-    author: String
+    id: ID,
+    author: String,
+    title: String
   }
 `;
 
