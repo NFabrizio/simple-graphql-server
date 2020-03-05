@@ -5,52 +5,52 @@ const { makeExecutableSchema } = require('graphql-tools');
 // Some fake data
 const books = [
   {
-    id: 0,
-    title: "Harry Potter and the Chamber of Secrets",
+    id: '0',
+    title: 'Harry Potter and the Chamber of Secrets',
     author: 'J.K. Rowling',
   },
   {
-    id: 1,
+    id: '1',
     title: 'The Brethren',
     author: 'John Grisham',
   },
   {
-    id: 2,
+    id: '2',
     title: 'The Wedding',
     author: 'Danielle Steel',
   },
   {
-    id: 3,
+    id: '3',
     title: 'The Indwelling',
     author: 'Tim LaHaye',
   },
   {
-    id: 4,
+    id: '4',
     title: 'Hot Six',
     author: 'Janet Evanovich',
   },
   {
-    id: 5,
+    id: '5',
     title: 'The Bear and the Dragon',
     author: 'Tom Clancy',
   },
   {
-    id: 6,
+    id: '6',
     title: 'The Rescue',
     author: 'Nicholas Sparks',
   },
   {
-    id: 7,
+    id: '7',
     title: 'The Last Precinct',
     author: 'Patricia Cornwell',
   },
   {
-    id: 8,
+    id: '8',
     title: 'Winter\'s Heart',
     author: 'Robert Jordan',
   },
   {
-    id: 9,
+    id: '9',
     title: 'The Mark',
     author: 'Jerry B. Jenkins',
   }
@@ -59,7 +59,8 @@ const books = [
 // The GraphQL schema in string form
 const typeDefs = `
   type Query {
-    books: [Book]
+    getBooks: [Book],
+    getBookById(id: ID!): Book
   }
   type Book {
     id: ID,
@@ -71,7 +72,8 @@ const typeDefs = `
 // The resolvers
 const resolvers = {
   Query: {
-    books: () => books
+    getBooks: () => books,
+    getBookById: (obj, { id }) => books.find((book) => book.id === id)
   },
 };
 
