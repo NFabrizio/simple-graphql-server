@@ -62,6 +62,15 @@ const typeDefs = `
     getBooks: [Book],
     getBookById(id: ID!): Book
   }
+  type DeleteMessage {
+    id: ID!,
+    message: String
+  }
+  type Mutation {
+    addBook(author: String!, title: String!): Book,
+    removeBook(id: ID!): DeleteMessage,
+    updateBook(id: ID!, author: String, title: String): Book
+  }
   type Book {
     id: ID,
     author: String,
@@ -75,6 +84,53 @@ const resolvers = {
     getBooks: () => books,
     getBookById: (obj, { id }) => books.find((book) => book.id === id)
   },
+  Mutation: {
+    addBook: (obj, { author, title }) => {
+      const newBook = {
+        id: books.length,
+        author,
+        title
+      };
+
+      books.push(newBook);
+
+      return newBook;
+    },
+    removeBook: (obj, { id }) => {
+      const bookToDelete = books.find(book => book.id === id);
+
+      if (bookToDelete) {
+        const bookIndex = books.indexOf(bookToDelete);
+
+        books.splice(bookIndex, 1);
+
+        return { id, message: 'Book deleted successfully' };
+      }
+
+      throw new Error('No book found with that ID');
+    },
+    updateBook: (obj, { id, author, title }) => {
+      const originalBook = books.find(book => book.id === id);
+      const updatedBook = Object.assign(
+        {},
+        originalBook,
+        {
+          ...author && { author },
+          ...title && { title }
+        }
+      );
+
+      if (originalBook) {
+        const bookIndex = books.indexOf(originalBook);
+
+        books[bookIndex] = updatedBook;
+
+        return updatedBook;
+      }
+
+      throw new Error('No book found with that ID');
+    }
+  }
 };
 
 // Put together a schema
