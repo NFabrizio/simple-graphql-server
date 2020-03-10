@@ -87,7 +87,7 @@ const resolvers = {
   Mutation: {
     addBook: (obj, { author, title }) => {
       const newBook = {
-        id: books.length,
+        id: String(books.length),
         author,
         title
       };
