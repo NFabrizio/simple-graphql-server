@@ -1,7 +1,7 @@
 # simple-graphql-server
 
 This is a basic GraphQL server for familiarization with GraphQL concepts. It was
-initiated with the code provided at https://www.apollographql.com/docs/apollo-server/v1/example/,
+initiated with the code provided at https://www.apollographql.com/docs/apollo-server/v1/example,
 which was the initial commit for this repository. From that starting point, other
 standard types and resolvers were added to allow querying a single book by its ID,
 updating an existing book, adding a new book and deleting an existing book. This
